@@ -7,6 +7,21 @@ export default class Account extends Component {
       balance: 0
     }
   }  //  constructor (props)
+
+  handleDepositClick(e) {
+    e.preventDefault()  // It is good practice to still prevent default behavior
+    let depositBal = parseInt(this.refs.money.value, 10) ;
+    let firstBalance = this.state.balance;   
+    let newDepoBalance = firstBalance + depositBal;
+    console.log("orig balance", firstBalance);
+    console.log("final bal ", newDepoBalance);
+    this.setState=({
+      balance: newDepoBalance 
+      })
+    // empty out the text box in this component
+    this.refs.amount.value = '';
+  }  //  handleDepositClick
+
   handleWithdrawClick(e) {
     var withdrawBal = this.refs.money.value;
     console.log("withdrawBal is: ", withdrawBal);
@@ -19,19 +34,6 @@ export default class Account extends Component {
       })
     // })
   }  //  handleWithdrawClick
-  handleDepositClick(e) {
-    e.preventDefault()  // It is good practice to still prevent default behavior
-    var depositBal = this.refs.money.value;
-    var firstBalance = this.state.balance;   
-    var newDepoBalance = firstBalance + depositBal;
-    console.log("orig balance", firstBalance);
-    console.log("final bal ", newDepoBalance);
-    this.setState=({
-      balance: newDepoBalance 
-      })
-    // empty out the text box in this component
-    this.refs.amount.value = '';
-  }  //  handleDepositClick
 
   render() {
       // set the default class to `balance` for the balanceClass.
