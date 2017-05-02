@@ -10,29 +10,31 @@ export default class Account extends Component {
 
   handleDepositClick(e) {
     e.preventDefault()  // It is good practice to still prevent default behavior
-    let depositBal = parseInt(this.refs.money.value, 10) ;
+    let depositBal = parseInt(this.refs.money.value, 10) ;  // radax 10
     let firstBalance = this.state.balance;   
     let newDepoBalance = firstBalance + depositBal;
-    console.log("orig balance", firstBalance);
     console.log("final bal ", newDepoBalance);
     this.setState=({
       balance: newDepoBalance 
       })
     // empty out the text box in this component
-    this.refs.amount.value = '';
+    this.refs.money.value = '';
   }  //  handleDepositClick
 
   handleWithdrawClick(e) {
-    var withdrawBal = this.refs.money.value;
-    console.log("withdrawBal is: ", withdrawBal);
-    var oldBalance = this.state.balance;   //    this isn't working !
-    console.log("this.state.balance is: ", oldBalance);
-    var newBalance = oldBalance - withdrawBal;
+    console.log(this);
+    e.preventDefault() 
+    let withdrawBal = parseInt(this.refs.money.value, 10)  ;
+    let oldBalance = this.state.balance;  
+    let newBalance = oldBalance - withdrawBal;
+    if (newBalance < 0) {
+      newBalance = 0
+    }
     console.log("after subtraction is:", newBalance);
     this.setState=({
       balance: newBalance 
       })
-    // })
+    this.refs.money.value = '';
   }  //  handleWithdrawClick
 
   render() {
@@ -45,7 +47,7 @@ export default class Account extends Component {
     return (
       <div className="account">
         <h2>{this.props.name}</h2>
-        <div className={balanceClass}>$0</div>
+        <div className={balanceClass}>${this.state.balance}</div>
         <input type="text" ref="money" placeholder="enter amount" />
         <input type="button" onClick={(e) => this.handleDepositClick(e)} value="Deposit" />
         <input type="button" onClick={(e) => this.handleWithdrawClick(e)}     value="Withdraw" />
