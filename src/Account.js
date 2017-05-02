@@ -14,7 +14,7 @@ export default class Account extends Component {
     let firstBalance = this.state.balance;   
     let newDepoBalance = firstBalance + depositBal;
     console.log("final bal ", newDepoBalance);
-    this.setState=({
+    this.setState({
       balance: newDepoBalance 
       })
     // empty out the text box in this component
@@ -31,7 +31,7 @@ export default class Account extends Component {
       newBalance = 0
     }
     console.log("after subtraction is:", newBalance);
-    this.setState=({
+    this.setState({
       balance: newBalance 
       })
     this.refs.money.value = '';
